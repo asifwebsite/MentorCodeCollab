@@ -17,7 +17,7 @@ const LobbyPage = () => {
         setLoading(true)
         setError('')
         try {
-            const response = await axios.get(`${API_URL}/api/codeblocks`);
+            const response = await axios.get(`${API_URL}api/codeblocks`);
             setCodeBlocks(response.data);
         } catch (error) {
             setError('Error fetching code blocks');

@@ -30,15 +30,19 @@ mongoConnect();
 const app = express();
 // CORS configuration for localhost:3000
 app.use(cors({
-    origin: process.env.FRONTEND_URL, // Allow only frontend to access
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true // Enable credentials for CORS
 }));
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+});
 
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: process.env.FRONTEND_URL,
+        origin: process.env.FRONTEND_URL || "http://localhost:3000",
         methods: ['GET', 'POST'],
         credentials: true
     }
