@@ -14,8 +14,8 @@ import 'ace-builds/src-noconflict/theme-monokai'; // Import the theme you want
 
 import '../styles/CodeBlockPage.css';
 
-const SOCKET_URL = process.env.SOCKET_URL || 'http://localhost:3001';
-const API_URL = process.env.API_URL || 'http://localhost:3001';
+const SOCKET_URL = "https://mentor-code-collab.onrender.com";
+const API_URL = "https://mentor-code-collab.onrender.com";
 
 const CodeBlockPage = () => {
     const { id } = useParams();
