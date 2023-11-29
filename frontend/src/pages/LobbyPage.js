@@ -5,7 +5,7 @@ import '../styles/LobbyPage.css'
 import '../styles/LoaderWheel.css'
 import loaderGif from '../assets/spinner.gif';
 
-const API_URL = 'http://localhost:3001/';
+const API_URL = process.env.API_URL || 'http://localhost:3001';
 
 
 const LobbyPage = () => {
@@ -17,7 +17,7 @@ const LobbyPage = () => {
         setLoading(true)
         setError('')
         try {
-            const response = await axios.get(`${API_URL}api/codeblocks`);
+            const response = await axios.get(`${API_URL}/api/codeblocks`);
             setCodeBlocks(response.data);
         } catch (error) {
             setError('Error fetching code blocks');
