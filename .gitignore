@@ -1,0 +1,16 @@
+# Node.js
+/node_modules/
+
+# React
+/frontend/build/
+/frontend/dist/
+/frontend/.cache/
+
+# Backend
+/backend/node_modules/
+
+# Frontend
+/frontend/node_modules/
+
+# Environment files
+.env

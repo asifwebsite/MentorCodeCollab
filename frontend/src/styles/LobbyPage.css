@@ -1,0 +1,35 @@
+.lobby-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    color: darkgrey;
+    margin-bottom: 30px;
+}
+
+.code-block {
+    border: 2px solid darkgrey;
+    background-color: white;
+    padding: 15px;
+    margin: 10px auto;
+    width: 60%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.code-block:hover {
+    background-color: darkgrey;
+    color: white;
+}
+
+.code-block {
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
