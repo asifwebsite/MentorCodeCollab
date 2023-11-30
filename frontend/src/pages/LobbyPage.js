@@ -6,7 +6,7 @@ import '../styles/LoaderWheel.css'
 import loaderGif from '../assets/spinner.gif';
 
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 
 const LobbyPage = () => {
