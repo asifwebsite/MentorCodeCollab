@@ -6,7 +6,7 @@ MentorCodeCollab is a collaborative coding environment where mentors can share c
 
 Installing and Running:
 Clone the repository: git clone https://github.com/asifwebsite/MentorCodeCollab.git
-cd moveo
+cd MentorCodeCollab
 
 Install dependencies for the project:
 npm run build
