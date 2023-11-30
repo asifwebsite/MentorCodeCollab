@@ -8,7 +8,7 @@ const CodeBlock = require('./models/codeBlock');
 require('dotenv').config({ path: '.env' });
 
 async function mongoConnect() {
-    const mongoUri = process.env.MONGO_URI;
+    const mongoUri = process.env.MONGO_URI || "mongodb+srv://asifamar:NAsgTqCqRKxwJS4y@cluster0.kx4w292.mongodb.net/moveoDB";
     if (!mongoUri) {
         console.error('MongoDB connection string is not set in environment variables');
         process.exit(1);
