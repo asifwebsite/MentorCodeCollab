@@ -1,3 +1,18 @@
+.home-icon {
+    width: 30px;
+    /* Adjust the size as needed */
+    height: auto;
+    vertical-align: middle;
+    /* Aligns the icon with the text */
+    margin-right: 5px;
+    /* Spacing between the icon and the text */
+    margin-top: 10px;
+    /* Top margin */
+    margin-left: 10px;
+    /* Left margin */
+}
+
+
 .codeblock-container {
     display: flex;
     flex-direction: column;

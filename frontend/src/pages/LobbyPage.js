@@ -5,9 +5,8 @@ import '../styles/LobbyPage.css'
 import '../styles/LoaderWheel.css'
 import loaderGif from '../assets/spinner.gif';
 
-// const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 const API_URL = "https://mentor-code-collab.onrender.com"
-console.log(API_URL)
 
 
 const LobbyPage = () => {

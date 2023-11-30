@@ -94,9 +94,17 @@ io.on('connection', (socket) => {
         socket.to(data.roomId).emit('solutionChecked', data);
     });
 
+    socket.on('resetRoom', (roomId) => {
+        socket.to(roomId).emit('roomReset');
+        io.socketsLeave(roomId);
+        delete roomMentors[roomId];
+    });
+
     socket.on('disconnect', () => {
         Object.keys(roomMentors).forEach(roomId => {
             if (roomMentors[roomId] === socket.id) {
+                socket.to(roomId).emit('roomReset');
+                io.socketsLeave(roomId);
                 delete roomMentors[roomId];
             }
         });

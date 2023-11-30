@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import io from 'socket.io-client';
 import axios from 'axios';
 import AceEditor from 'react-ace';
 import loaderGif from '../assets/spinner.gif';
 import correctSmiley from '../assets/correctSmiley.jpeg'
 import wrongSmiley from '../assets/wrongSmiley.jpg'
-
-
-
+import homeIcon from '../assets/house.png';
 import 'ace-builds/src-noconflict/mode-javascript'; // Import the mode for the syntax you need
 import 'ace-builds/src-noconflict/theme-monokai'; // Import the theme you want
-
 import '../styles/CodeBlockPage.css';
 
 const SOCKET_URL = "https://mentor-code-collab.onrender.com";
@@ -89,6 +86,12 @@ const CodeBlockPage = () => {
         }, 5000); // Hide the GIF after 5 seconds
     };
 
+    const handleLobbyClick = () => {
+        if (role === 'mentor') {
+            socket.emit('resetRoom', id);
+        }
+    };
+
     useEffect(() => {
         fetchCodeBlock();
     }, [id]);
@@ -108,10 +111,15 @@ const CodeBlockPage = () => {
             showResultGif(data.isCorrect ? correctSmiley : wrongSmiley);
         });
 
+        socket.on('roomReset', () => {
+            window.location.href = '/';
+        });
+
         return () => {
             socket.off('role');
             socket.off('codeUpdate');
             socket.off('solutionChecked');
+            socket.off('roomReset');
         };
     }, [socket, id]);
 
@@ -122,40 +130,44 @@ const CodeBlockPage = () => {
             ) : error ? (
                 <div>Error: {error}</div>
             ) : (
-                <div className="codeblock-container">
-                    <h2 className="codeblock-title">{codeBlock.title}</h2>
-                    <h3 className={`codeblock-role-${role}`}>{role}</h3>
-                    <AceEditor
-                        mode="javascript"
-                        theme="monokai"
-                        name="codeEditor"
-                        value={code}
-                        onChange={handleCodeChange}
-                        readOnly={role !== 'student'}
-                        fontSize={14}
-                        showPrintMargin={true}
-                        showGutter={true}
-                        highlightActiveLine={true}
-                        setOptions={{
-                            useWorker: false,
-                            showLineNumbers: true,
-                            tabSize: 2,
-                        }}
-                        style={{ width: '60%', height: '350px' }}
-                    />
-                    {role === 'student' && (
-                        <button className='submit-button' onClick={compareSolution} disabled={loading}>
-                            Submit Solution
-                        </button>
-                    )}
-                    {resultGif && (
-                        <div className="centered-image-container">
-                            <img src={resultGif} alt="Result" />
-                        </div>
-                    )}
-                </div>
+                <>
+                    <Link to='/' className='lobby-button' onClick={handleLobbyClick}>
+                        <img src={homeIcon} alt="Home" className="home-icon" />
+                    </Link>
+                    <div className="codeblock-container">
+                        <h2 className="codeblock-title">{codeBlock.title}</h2>
+                        <h3 className={`codeblock-role-${role}`}>{role}</h3>
+                        <AceEditor
+                            mode="javascript"
+                            theme="monokai"
+                            name="codeEditor"
+                            value={code}
+                            onChange={handleCodeChange}
+                            readOnly={role !== 'student'}
+                            fontSize={14}
+                            showPrintMargin={true}
+                            showGutter={true}
+                            highlightActiveLine={true}
+                            setOptions={{
+                                useWorker: false,
+                                showLineNumbers: true,
+                                tabSize: 2,
+                            }}
+                            style={{ width: '60%', height: '350px' }}
+                        />
+                        {role === 'student' && (
+                            <button className='submit-button' onClick={compareSolution} disabled={loading}>
+                                Submit Solution
+                            </button>
+                        )}
+                        {resultGif && (
+                            <div className="centered-image-container">
+                                <img src={resultGif} alt="Result" />
+                            </div>
+                        )}
+                    </div>
 
-            )}
+                </>)}
         </>
     );
 };
