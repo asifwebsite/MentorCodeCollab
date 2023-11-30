@@ -11,8 +11,12 @@ import 'ace-builds/src-noconflict/mode-javascript'; // Import the mode for the s
 import 'ace-builds/src-noconflict/theme-monokai'; // Import the theme you want
 import '../styles/CodeBlockPage.css';
 
-const SOCKET_URL = "https://mentor-code-collab.onrender.com";
-const API_URL = "https://mentor-code-collab.onrender.com";
+// const SOCKET_URL = "https://mentor-code-collab.onrender.com";
+// const API_URL = "https://mentor-code-collab.onrender.com";
+
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL;
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const CodeBlockPage = () => {
     const { id } = useParams();
